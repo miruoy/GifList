@@ -105,3 +105,9 @@ stale `.pyc` will keep the old code live.
   empty. Add your key to `giphy.key` in the plugin directory.
 - **`Giphy error: ...`** — network issue or API limit; the key may be invalid
   or rate-limited.
+
+## License
+
+Licensed under the GNU General Public License v2 (GPL-2.0). See the
+`LICENSE` file for the full text.
+
