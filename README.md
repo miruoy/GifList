@@ -43,7 +43,8 @@ to a list of URLs, or to the string `"__giphy__"` to use Giphy for that term:
 The shipped `gifs.json` is pre-filled with 15 real GIF URLs per name for:
 bender, fry, professor, futurama, zoidberg, leela, sw, prequels, rebels,
 badbatch, clonewars, vader, yoda, mandalorian, grogu, memes, cat, dog,
-reaction, funny.
+reaction, funny, ronswanson, parksandrec, darksouls, eldenring, zelda,
+masseffect, fallout, leisuresuitlarry, mario.
 
 ### Giphy API key — giphy.key
 
