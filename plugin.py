@@ -20,6 +20,18 @@ from supybot.i18n import PluginInternationalization, internationalizeDocstring
 _ = PluginInternationalization('GifList')
 
 
+def _load_giphy_key():
+    """Lees de Giphy API-key uit giphy.key (1 regel). Returns '' als niet gevonden."""
+    here = os.path.dirname(os.path.abspath(__file__))
+    p = os.path.join(here, 'giphy.key')
+    try:
+        with open(p, encoding='utf-8') as f:
+            return f.read().strip()
+    except OSError:
+        return ''
+
+_GIPHY_KEY = _load_giphy_key()
+
 def _load_gifs():
     """Load gifs.json from the plugin directory. Returns dict or {'__error__': ...}."""
     here = os.path.dirname(os.path.abspath(__file__))
@@ -37,6 +49,31 @@ def _load_gifs():
         return gifs
     except (OSError, ValueError) as e:
         return {'__error__': str(e)}
+
+
+def _giphy_random(term, api_key, limit=50):
+    """Haal een random gif-URL van Giphy voor <term>. Returns (url, error)."""
+    if not api_key:
+        return (None, 'no Giphy API key configured')
+    import urllib.request, urllib.parse, json
+    q = urllib.parse.quote(term)
+    url = ('https://api.giphy.com/v1/gifs/search?api_key=%s&q=%s&limit=%d'
+           % (api_key, q, limit))
+    req = urllib.request.Request(
+        url, headers={'User-Agent': 'Mozilla/5.0 (GifList/Limnoria)'})
+    try:
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            data = json.loads(resp.read().decode('utf-8'))
+        gifs = data.get('data', [])
+        if not gifs:
+            return (None, 'no gifs found for %s' % term)
+        import random
+        g = random.choice(gifs)
+        # prefereer de directe gif-URL, anders de originele
+        return (g.get('images', {}).get('original', {}).get('url') or
+                g.get('url', ''), None)
+    except (urllib.error.URLError, ValueError, OSError) as e:
+        return (None, str(e))
 
 
 class GifList(callbacks.Plugin):
@@ -63,6 +100,14 @@ class GifList(callbacks.Plugin):
             avail = ', '.join(sorted(gifs.keys())) or '(none)'
             irc.error(format(_('Unknown name %s. Available: %s'), name, avail), Raise=True)
 
+        # Als het een giphy-pool is, haal een random gif van Giphy
+        if isinstance(gifs[name], str) and gifs[name] == '__giphy__':
+            (url, err) = _giphy_random(name, _GIPHY_KEY)
+            if err:
+                irc.error(_('Giphy error: %s') % err, Raise=True)
+            irc.reply(url)
+            return
+
         import random
         url = random.choice(gifs[name])
         irc.reply(url)
@@ -85,6 +130,34 @@ class GifList(callbacks.Plugin):
 
     gifs = wrap(gifs)
 
+
+    @internationalizeDocstring
+    def random(self, irc, msg, args):
+        """takes no argument
+
+        Posts a random GIF from a RANDOM list (picks a random name first,
+        then a random GIF from that list — local or Giphy).
+        """
+        gifs = _load_gifs()
+        if '__error__' in gifs:
+            irc.error(_('Failed to load gifs.json: %s') % gifs['__error__'], Raise=True)
+        names = [n for n in gifs if n != '__error__']
+        if not names:
+            irc.reply(_('No GIF lists configured.'))
+            return
+        import random as _r
+        name = _r.choice(names)
+        # giphy-pool?
+        if isinstance(gifs[name], str) and gifs[name] == '__giphy__':
+            (url, err) = _giphy_random(name, _GIPHY_KEY)
+            if err:
+                irc.error(_('Giphy error: %s') % err, Raise=True)
+            irc.reply(url)
+            return
+        url = _r.choice(gifs[name])
+        irc.reply(url)
+
+    random = wrap(random)
 
 Class = GifList
 

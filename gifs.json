@@ -1,56 +1,24 @@
 {
-  "bender": [
-    "https://i.imgur.com/l85WHJg.gif",
-    "https://i.imgur.com/C0dgZdg.gif"
-  ],
-  "fry": [
-    "https://i.imgur.com/C0dgZdg.gif"
-  ],
-  "professor": [
-    "https://i.imgur.com/C0dgZdg.gif"
-  ],
-  "futurama": [
-    "https://i.imgur.com/l85WHJg.gif",
-    "https://i.imgur.com/C0dgZdg.gif"
-  ],
-  "memes": [
-    "https://i.imgur.com/l85WHJg.gif",
-    "https://i.imgur.com/C0dgZdg.gif"
-  ],
+  "bender": "__giphy__",
+  "fry": "__giphy__",
+  "professor": "__giphy__",
+  "futurama": "__giphy__",
+  "zoidberg": "__giphy__",
+  "leela": "__giphy__",
 
-  "sw": [
-    "https://i.imgur.com/C0dgZdg.gif"
-  ],
-  "prequels": [
-    "https://i.imgur.com/C0dgZdg.gif"
-  ],
-  "rebels": [],
-  "badbatch": [],
-  "clonewars": [],
-  "vader": [
-    "https://i.imgur.com/C0dgZdg.gif"
-  ],
-  "yoda": [
-    "https://i.imgur.com/C0dgZdg.gif"
-  ],
-  "mandalorian": [
-    "https://i.imgur.com/C0dgZdg.gif"
-  ],
-  "grogu": [
-    "https://i.imgur.com/C0dgZdg.gif"
-  ],
+  "sw": "__giphy__",
+  "prequels": "__giphy__",
+  "rebels": "__giphy__",
+  "badbatch": "__giphy__",
+  "clonewars": "__giphy__",
+  "vader": "__giphy__",
+  "yoda": "__giphy__",
+  "mandalorian": "__giphy__",
+  "grogu": "__giphy__",
 
-  "cat": [
-    "https://i.imgur.com/l85WHJg.gif"
-  ],
-  "dog": [
-    "https://i.imgur.com/C0dgZdg.gif"
-  ],
-  "reaction": [
-    "https://i.imgur.com/l85WHJg.gif"
-  ],
-  "funny": [
-    "https://i.imgur.com/l85WHJg.gif",
-    "https://i.imgur.com/C0dgZdg.gif"
-  ]
+  "memes": "__giphy__",
+  "cat": "__giphy__",
+  "dog": "__giphy__",
+  "reaction": "__giphy__",
+  "funny": "__giphy__"
 }

@@ -1,49 +1,78 @@
 # GifList
 
-A Limnoria plugin that posts a random GIF/URL from a **local** list, safe for
-**unregistered** users. No network access is performed — the URLs come from a
-local `gifs.json` file — so there is no command-injection risk and no
-rate-limit (HTTP 429) issues.
+A Limnoria plugin that posts random GIFs/URLs, safe for **unregistered**
+users. Two sources:
+
+- **Local lists** — URLs from `gifs.json` (no network access, no rate-limits).
+- **Giphy** — random GIFs fetched from the Giphy API for a search term
+  (requires a free API key in `giphy.key`).
+
+No shell is spawned, so there is no command-injection risk.
 
 ## Commands
 
 | Command | Description |
 | --- | --- |
-| `gif <name>` | Posts a random URL from the list named `<name>`. |
-| `gifs` | Lists the available list names. |
+| `gif <name>` | Posts a random GIF from the list/pool named `<name>`. |
+| `gifs` | Lists the available list/pool names. |
+| `random` | Posts a random GIF from a RANDOM list/pool. |
 
-## Configuration: gifs.json
+## Configuration
 
-Edit `gifs.json` (in this directory) to add your own named URL lists. Each
-name maps to a list of URLs:
+### Local lists — gifs.json
+
+Edit `gifs.json` (in this directory) to add named URL lists. Each name maps
+to a list of URLs, or to the string `"__giphy__"` to use Giphy for that term:
 
 ```json
 {
-  "bender": [
-    "https://i.imgur.com/l85WHJg.gif",
-    "https://i.imgur.com/xxxxxxxx.gif"
-  ],
-  "futurama": [
-    "https://i.imgur.com/l85WHJg.gif",
-    "https://i.imgur.com/yyyyyyyy.gif"
-  ]
+  "bender": "__giphy__",
+  "fry":    "__giphy__",
+  "cat":    ["https://i.imgur.com/l85WHJg.gif"],
+  "memes":  ["https://i.imgur.com/l85WHJg.gif", "https://i.imgur.com/C0dgZdg.gif"]
 }
 ```
 
-Then create aliases in the bot:
+- A list of URLs → the bot picks one at random (local, no network).
+- `"__giphy__"` → the bot fetches a random GIF from Giphy for that name as the
+  search term (e.g. `gif fry` searches Giphy for "fry").
+
+### Giphy API key — giphy.key
+
+For Giphy-backed pools, put your free API key (one line, no quotes/newline)
+in `giphy.key` in this directory:
+
+```
+<GIPHY_KEY_REMOVED>
+```
+
+Get a key at https://developers.giphy.com/dashboard/ (free tier).
+
+> Note: `giphy.key` should NOT be committed to git — keep it local.
+> `gifs.json` is safe to commit (it contains no secret).
+
+## Usage examples
+
+```
+gif bender        # random Bender GIF (from Giphy)
+gif cat           # random cat GIF (from local list in gifs.json)
+random            # random GIF from a random pool
+gifs              # show all available names
+```
+
+Aliases in the bot:
 
 ```
 alias add bender "gif bender"
-alias add futurama "gif futurama"
+alias add fry    "gif fry"
+alias add sw     "gif sw"
 ```
 
-Now `@bender` (or `gif bender`) posts a random GIF from the `bender` list.
+Now `@bender`, `@fry`, `@sw` each post a random GIF.
 
-> Note: list names are case-insensitive.
+> Note: list/pool names are case-insensitive.
 
 ## Installation
-
-Copy the plugin directory into your bot's plugin path, then load it:
 
 ```bash
 cp -r GifList /path/to/your/bot/plugins/
@@ -63,3 +92,7 @@ stale `.pyc` will keep the old code live.
   Add it, or check the spelling (case-insensitive).
 - **`Failed to load gifs.json: ...`** — the JSON file is missing or invalid.
   Fix `gifs.json` in the plugin directory.
+- **`Giphy error: no Giphy API key configured`** — `giphy.key` is missing or
+  empty. Add your key to `giphy.key` in the plugin directory.
+- **`Giphy error: ...`** — network issue or API limit; the key may be invalid
+  or rate-limited.
