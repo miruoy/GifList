@@ -69,7 +69,11 @@ def _giphy_random(term, api_key, limit=50):
             return (None, 'no gifs found for %s' % term)
         import random
         g = random.choice(gifs)
-        # prefereer de directe gif-URL, anders de originele
+        # gebruik de KORTE giphy-url: media.giphy.com/media/<id>/giphy.gif
+        gid = g.get('id', '')
+        if gid:
+            return ('https://media.giphy.com/media/%s/giphy.gif' % gid, None)
+        # fallback: originele url
         return (g.get('images', {}).get('original', {}).get('url') or
                 g.get('url', ''), None)
     except (urllib.error.URLError, ValueError, OSError) as e:
