@@ -1,9 +1,56 @@
 {
   "bender": [
-    "https://i.imgur.com/l85WHJg.gif"
+    "https://i.imgur.com/l85WHJg.gif",
+    "https://i.imgur.com/C0dgZdg.gif"
+  ],
+  "fry": [
+    "https://i.imgur.com/C0dgZdg.gif"
+  ],
+  "professor": [
+    "https://i.imgur.com/C0dgZdg.gif"
   ],
   "futurama": [
     "https://i.imgur.com/l85WHJg.gif",
-    "https://i.imgur.com/3QZ9Z0L.gif"
+    "https://i.imgur.com/C0dgZdg.gif"
+  ],
+  "memes": [
+    "https://i.imgur.com/l85WHJg.gif",
+    "https://i.imgur.com/C0dgZdg.gif"
+  ],
+
+  "sw": [
+    "https://i.imgur.com/C0dgZdg.gif"
+  ],
+  "prequels": [
+    "https://i.imgur.com/C0dgZdg.gif"
+  ],
+  "rebels": [],
+  "badbatch": [],
+  "clonewars": [],
+  "vader": [
+    "https://i.imgur.com/C0dgZdg.gif"
+  ],
+  "yoda": [
+    "https://i.imgur.com/C0dgZdg.gif"
+  ],
+  "mandalorian": [
+    "https://i.imgur.com/C0dgZdg.gif"
+  ],
+  "grogu": [
+    "https://i.imgur.com/C0dgZdg.gif"
+  ],
+
+  "cat": [
+    "https://i.imgur.com/l85WHJg.gif"
+  ],
+  "dog": [
+    "https://i.imgur.com/C0dgZdg.gif"
+  ],
+  "reaction": [
+    "https://i.imgur.com/l85WHJg.gif"
+  ],
+  "funny": [
+    "https://i.imgur.com/l85WHJg.gif",
+    "https://i.imgur.com/C0dgZdg.gif"
   ]
 }
