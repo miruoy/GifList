@@ -136,11 +136,12 @@ class GifList(callbacks.Plugin):
 
 
     @internationalizeDocstring
-    def random(self, irc, msg, args):
+    def gifrnd(self, irc, msg, args):
         """takes no argument
 
         Posts a random GIF from a RANDOM list (picks a random name first,
-        then a random GIF from that list — local or Giphy).
+        then a random GIF from that list — local or Giphy). Named 'gifrnd'
+        to avoid clashing with other plugins' 'random' command.
         """
         gifs = _load_gifs()
         if '__error__' in gifs:
@@ -161,7 +162,7 @@ class GifList(callbacks.Plugin):
         url = _r.choice(gifs[name])
         irc.reply(url)
 
-    random = wrap(random)
+    gifrnd = wrap(gifrnd)
 
 Class = GifList
 

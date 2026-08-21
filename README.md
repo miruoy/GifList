@@ -17,7 +17,7 @@ No shell is spawned, so there is no command-injection risk.
 | --- | --- |
 | `gif <name>` | Posts a random GIF from the list/pool named `<name>`. |
 | `gifs` | Lists the available list/pool names. |
-| `random` | Posts a random GIF from a RANDOM list/pool. |
+| `gifrnd` | Posts a random GIF from a RANDOM list/pool (named to avoid clash with other plugins' `random`). |
 
 ## Configuration
 
@@ -64,7 +64,7 @@ Get a key at https://developers.giphy.com/dashboard/ (free tier).
 ```
 gif bender        # random Bender GIF (from local list in gifs.json)
 gif fry           # random Fry GIF (from Giphy, if fry is "__giphy__")
-random            # random GIF from a random pool
+gifrnd            # random GIF from a random pool
 gifs              # show all available names
 ```
 
