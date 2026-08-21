@@ -83,7 +83,19 @@ Now `@bender`, `@fry`, `@sw` each post a random GIF.
 
 ## Installation
 
+```
+### Via pip (from the git repo)
 ```bash
+pip3 install git+https://github.com/miruoy/GifList.git
+# then in the bot:
+load GifList
+```
+
+### Via PluginDownloader (after the repo is added to Limnoria's list)
+```bash
+@plugindownloader install miruoy
+```
+bash
 cp -r GifList /path/to/your/bot/plugins/
 rm -rf /path/to/your/bot/plugins/GifList/__pycache__
 # in the bot:
