@@ -51,7 +51,7 @@ For Giphy-backed pools (`"__giphy__"`), put your free API key (one line, no
 quotes/newline) in `giphy.key` in this directory:
 
 ```
-<GIPHY_KEY_REMOVED>
+<YOUR_GIPHY_API_KEY>
 ```
 
 Get a key at https://developers.giphy.com/dashboard/ (free tier).
